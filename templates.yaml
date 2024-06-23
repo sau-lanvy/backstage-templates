@@ -6,4 +6,4 @@ metadata:
 spec:
   type: url
   targets:
-    - templates/dotnet-frontend/template.yaml
+    - templates/react-ssr-template/template.yaml
