@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: my-collection
+  description: A collection of Example Software Templates
+spec:
+  type: url
+  targets:
+    - templates/dotnet-frontend/template.yaml
