@@ -9,7 +9,7 @@ metadata:
     - react
 spec:
   owner: havanit@gmail.com
-  type: website
+  type: service
   parameters:
     - title: Provide some simple information
       required:
