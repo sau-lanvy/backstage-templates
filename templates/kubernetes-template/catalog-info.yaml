@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: kubernetes-template
+  description: The first kubernetes template
+  tags:
+    - go
+  annotations:
+    "backstage.io/kubernetes-namespace": backstage
+spec:
+  type: service
+  lifecycle: development
+  owner: guest
