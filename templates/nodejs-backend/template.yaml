@@ -100,7 +100,7 @@ spec:
       name: Generating the Manifest Template
       action: fetch:template
       input:
-        url: ../../skeletons/manifests
+        url: ../../skeletons/manifest-template
         values:
           orgName: ${{ parameters.orgName }}
           repoName: ${{ parameters.repoName }}
