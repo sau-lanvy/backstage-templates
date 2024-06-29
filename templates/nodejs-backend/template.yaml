@@ -57,6 +57,8 @@ spec:
     - title: Provide information about the CI method
       required:
         - ci
+        - imageRepository
+        - namespace
       properties:
         ci:
           title: Select a CI method
@@ -67,24 +69,14 @@ spec:
             - ../../skeletons/github-actions/
           enumNames:
             - GitHub Action
-      dependencies:
-        ci:
-          oneOf:
-            - properties:
-                # Show no extra properties when GitHub Actions is selected
-                ci:
-                  const: ../../skeletons/github-actions/
-            - required:
-                - imageRepository
-                - namespace
-              properties:
-                imageRepository:
-                  title: Select a registry
-                  type: string
-                namespace:
-                  title: Namespace
-                  type: string
-                  description: The namespace for deploying resources
+        imageRepository:
+          title: Select a registry
+          type: string
+        namespace:
+          title: Namespace
+          type: string
+          description: The namespace for deploying resources
+                
   steps:
     - id: sourceCodeTemplate
       name: Generating the Source Code Component
@@ -109,8 +101,6 @@ spec:
       action: fetch:template
       input:
         url: ../../skeletons/
-        copyWithoutTemplating:
-          - manifests/*
         values:
           orgName: ${{ parameters.orgName }}
           repoName: ${{ parameters.repoName }}
