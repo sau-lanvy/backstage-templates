@@ -12,9 +12,7 @@ metadata:
     - express
 spec:
   owner: sau-lanvy
-  system: development
   type: service
-
   parameters:
     - title: Provide information about the new component
       required:
@@ -112,7 +110,7 @@ spec:
       input:
         url: ${{ parameters.ci }}
         copyWithoutTemplating:
-          - .github/workflows/
+          - .github/workflows/*
         values:
           orgName: ${{ parameters.orgName }}
           repoName: ${{ parameters.repoName }}
