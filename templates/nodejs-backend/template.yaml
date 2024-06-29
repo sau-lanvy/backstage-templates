@@ -104,6 +104,25 @@ spec:
           ci: ${{ parameters.ci }}
           sourceControl: github.com
 
+    - id: manifestTemplate
+      name: Generating the Manifest Template
+      action: fetch:template
+      input:
+        url: ../../skeletons/
+        copyWithoutTemplating:
+          - manifests/*
+        values:
+          orgName: ${{ parameters.orgName }}
+          repoName: ${{ parameters.repoName }}
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          applicationType: api
+          description: ${{ parameters.description }}
+          namespace: ${{ parameters.namespace }}
+          imageRepository: ${{ parameters.imageRepository }}
+          port: ${{ parameters.port }}
+          sourceControl: github.com
+
     - id: ciTemplate
       name: Generating the CI Component
       action: fetch:template
