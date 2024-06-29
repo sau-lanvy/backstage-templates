@@ -62,9 +62,9 @@ spec:
           title: Select a CI method
           type: string
           description: This action will create a CI pipeline for your application based on chosen method
-          default: ../../../skeletons/github-actions/
+          default: ../../skeletons/github-actions/
           enum:
-            - ../../../skeletons/github-actions/
+            - ../../skeletons/github-actions/
           enumNames:
             - GitHub Action
       dependencies:
@@ -73,7 +73,7 @@ spec:
             - properties:
                 # Show no extra properties when GitHub Actions is selected
                 ci:
-                  const: ../../../skeletons/github-actions/
+                  const: ../../skeletons/github-actions/
             - required:
                 - imageRepository
                 - namespace
@@ -128,7 +128,7 @@ spec:
       name: Generating the Catalog Info Component
       action: fetch:template
       input:
-        url: ../../../skeletons/catalog-info/
+        url: ../../skeletons/catalog-info/
         values:
           orgName: ${{ parameters.orgName }}
           repoName: ${{ parameters.repoName }}
