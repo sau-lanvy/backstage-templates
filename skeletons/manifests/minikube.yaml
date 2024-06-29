@@ -1,0 +1,65 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ${{ values.repoName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${{ values.repoName }}
+  template:
+    metadata:
+      labels:
+        app: ${{ values.repoName }}
+        app.kubernetes.io/component: backstage
+        backstage.io/kubernetes-id: ${{ values.namespace }}
+    spec:
+      containers:
+        - name: ${{ values.repoName }}
+          image: local/${{ values.repoName }}:latest
+          ports:
+            - name: http-${{ values.port }}
+              containerPort: ${{ values.port }}
+              protocol: TCP
+          resources:
+            limits:
+              memory: '128Mi'
+              cpu: '500m'
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ${{ values.repoName }}
+  labels:
+    app: ${{ values.repoName }}
+    app.kubernetes.io/component: backstage
+    backstage.io/kubernetes-id: ${{ values.namespace }}
+spec:
+  ports:
+    - name: http-${{ values.port }}
+      port: ${{ values.port }}
+      protocol: TCP
+      targetPort: ${{ values.port }}
+  selector:
+    app: ${{ values.repoName }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${{ values.repoName }}
+  namespace: ${{ values.namespace }}
+  labels:
+    app: ${{ values.repoName }}
+    app.kubernetes.io/component: backstage
+    backstage.io/kubernetes-id: ${{ values.namespace }}
+spec:
+  - host: ${{ values.hostUrl }}
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: ${{ values.repoName }}
+              port:
+                number: ${{ values.port }}
