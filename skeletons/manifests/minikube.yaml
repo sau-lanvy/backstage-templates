@@ -53,13 +53,13 @@ metadata:
     app.kubernetes.io/component: backstage
     backstage.io/kubernetes-id: ${{ values.namespace }}
 spec:
-  - host: ${{ values.hostUrl }}
-    http:
+  rules:
+  - http:
       paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: ${{ values.repoName }}
-              port:
-                number: ${{ values.port }}
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: ${{ values.repoName }}
+            port:
+              number: ${{ values.port }}
